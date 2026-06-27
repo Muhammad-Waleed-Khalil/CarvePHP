@@ -1,5 +1,37 @@
 # Changelog
 
+## v0.1.2-alpha — 2026-06-27
+
+### Fixed
+
+- Correct README status version to v0.1.2-alpha.
+- Correct Laravel compatibility statement to Laravel 11/12/13.
+- Fix malformed command table on Packagist.
+- Fix documented generator command names (carve:generate:service → carve:generate-service, etc.).
+- Clarify alpha Composer install command (require with `^0.1@alpha`).
+
+### Changed
+
+- Removed Laravel 10 compatibility note (no longer allowed in composer.json constraints).
+
+No runtime behavior changes.
+
+## v0.1.1-alpha — 2026-06-27
+
+### Added
+
+- **Laravel 13 support.** Package now supports Laravel 11, 12, and 13. CI matrix includes PHP 8.2/8.3/8.4 × Laravel 11/12/13 (PHP 8.2 + L13 excluded; L13 requires PHP ^8.3).
+
+### Changed
+
+- `illuminate/*` constraints raised to `^11.0|^12.0|^13.0`.
+- `orchestra/testbench` constraints raised to `^9.0|^10.0|^11.0`.
+
+### Fixed
+
+- `self::SUCCESS` replaced with `0` across all 12 Artisan commands (Symfony 8.0 removed the constant).
+- `CarveTraceMiddleware::handle()` return type changed from `Response` to `mixed` (Symfony 8.0 type resolution).
+
 ## v0.1.0-alpha — 2026-06-27
 
 ### Added
@@ -42,7 +74,6 @@
 - None.
 
 ### Known Limitations (v0.1.0-alpha)
-- Laravel 10 is installable but not covered by CI.
 - No automatic service generation or extraction.
 - Generators (`generate:service`, `shadow`, `diff`) are experimental stubs.
 - Runtime tracing must be manually configured.

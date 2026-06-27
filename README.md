@@ -6,14 +6,16 @@
 
 CarvePHP is a Laravel-first toolkit that analyzes your existing monolith and produces actionable migration reports. It combines static code analysis with runtime tracing to identify service boundaries with evidence.
 
-> **Status:** v0.1.0-alpha — Preview release. Ready for experimentation and feedback. Not yet production-ready for automatic extraction.
+> **Status:** v0.1.2-alpha — Preview release. Ready for experimentation and feedback. Not yet production-ready for automatic extraction.
+>
+> **Latest alpha:** v0.1.2-alpha
 
 ---
 
 ## Installation
 
 ```bash
-composer require carvephp/carve --dev
+composer require "carvephp/carve:>=0.1.0-alpha <0.2.0" --dev
 ```
 
 After installing, publish the config and run the environment check:
@@ -95,22 +97,25 @@ php artisan migrate
 ## Requirements
 
 - PHP 8.2+
-- Laravel 11 or 12
+- Laravel 11, 12, or 13
 - Composer 2.x
 
-> **Note:** Laravel 10 is installable but not covered by CI in this alpha release.
-
 ## Commands
-|---------|-------------|
-| `carve:doctor` | Check environment readiness |
-| `carve:scan` | Run static analysis on the monolith |
-| `carve:analyze` | Build dependency graph from static scan + traces |
-| `carve:boundaries` | Detect candidate service boundaries |
-| `carve:report` | Generate comprehensive migration report |
-| `carve:trace-install` | Guide runtime tracing setup |
-| `carve:install` | Publish config |
-| `carve:generate:service` | Generate service stub (experimental) |
-| `carve:shadow` | Run shadow requests for diff testing (experimental) |
+
+| Command                  | Description                                      |
+| ------------------------ | ------------------------------------------------ |
+| `carve:install`          | Publish config and migrations                    |
+| `carve:doctor`           | Check environment readiness                      |
+| `carve:scan`             | Run static analysis on the monolith              |
+| `carve:trace-install`    | Guide runtime tracing setup                      |
+| `carve:analyze`          | Build dependency graph from static scan + traces |
+| `carve:boundaries`       | Detect candidate service boundaries              |
+| `carve:report`           | Generate comprehensive migration report          |
+| `carve:generate-service` | Generate service stub (experimental)             |
+| `carve:generate-openapi` | Generate OpenAPI stub (experimental)             |
+| `carve:generate-client`  | Generate client SDK stub (experimental)          |
+| `carve:shadow`           | Shadow traffic/diff support (experimental)       |
+| `carve:diff`             | Compare saved shadow responses (experimental)    |
 
 ---
 
