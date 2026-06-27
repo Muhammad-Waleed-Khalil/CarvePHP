@@ -11,7 +11,7 @@ final class PhpParserFactory
 {
     public function create(): Parser
     {
-        $factory = new PhpParserFactoryBase();
+        $factory = new PhpParserFactoryBase;
 
         return $factory->createForHostVersion();
     }

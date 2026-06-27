@@ -71,7 +71,7 @@ final class CarveTraceMiddleware
         $name = $route->getName();
 
         foreach ($ignored as $pattern) {
-            $regex = '/^' . str_replace('\*', '.*', preg_quote($pattern, '/')) . '$/';
+            $regex = '/^'.str_replace('\*', '.*', preg_quote($pattern, '/')).'$/';
             if ($name !== null && preg_match($regex, $name)) {
                 return true;
             }

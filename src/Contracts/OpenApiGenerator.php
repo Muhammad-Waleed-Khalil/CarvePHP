@@ -46,7 +46,7 @@ final class OpenApiGenerator
     {
         $yaml = "openapi: 3.1.0\n";
         $yaml .= "info:\n";
-        $yaml .= "  title: " . ($data['name'] ?? 'Unknown') . " Service API\n";
+        $yaml .= '  title: '.($data['name'] ?? 'Unknown')." Service API\n";
         $yaml .= "  version: 0.1.0\n";
         $yaml .= "servers:\n";
         $yaml .= "  - url: http://localhost:8081\n";
@@ -66,16 +66,16 @@ final class OpenApiGenerator
         return json_encode([
             'openapi' => '3.1.0',
             'info' => [
-                'title' => ($data['name'] ?? 'Unknown') . ' Service API',
+                'title' => ($data['name'] ?? 'Unknown').' Service API',
                 'version' => '0.1.0',
             ],
             'servers' => [['url' => 'http://localhost:8081']],
-            'paths' => new \stdClass(),
+            'paths' => new \stdClass,
             'components' => [
                 'securitySchemes' => [
                     'bearerAuth' => ['type' => 'http', 'scheme' => 'bearer'],
                 ],
-                'schemas' => new \stdClass(),
+                'schemas' => new \stdClass,
             ],
         ], JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
     }

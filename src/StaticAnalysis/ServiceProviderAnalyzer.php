@@ -11,7 +11,7 @@ final class ServiceProviderAnalyzer
         $providers = [];
 
         foreach ($files as $file) {
-            if (str_contains($file, 'Providers' . DIRECTORY_SEPARATOR)) {
+            if (str_contains($file, 'Providers'.DIRECTORY_SEPARATOR)) {
             }
         }
 

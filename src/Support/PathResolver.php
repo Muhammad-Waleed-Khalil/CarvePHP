@@ -20,7 +20,7 @@ final class PathResolver
         $base = config('carve.generation.default_output_dir', base_path('carve-output'));
 
         if ($subpath !== '') {
-            return rtrim($base, '/\\') . '/' . ltrim($subpath, '/\\');
+            return rtrim($base, '/\\').'/'.ltrim($subpath, '/\\');
         }
 
         return $base;

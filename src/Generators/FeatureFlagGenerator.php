@@ -26,7 +26,7 @@ final class FeatureFlagGenerator
             ];
         }
 
-        $content = "<?php\n\nreturn [\n    'services' => " . var_export($services, true) . ",\n];\n";
+        $content = "<?php\n\nreturn [\n    'services' => ".var_export($services, true).",\n];\n";
         $path = "{$outputDir}/carve_features.php";
 
         $this->writer->write($path, $content, mkdir: true);

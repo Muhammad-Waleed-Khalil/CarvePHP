@@ -11,7 +11,7 @@ final class ApiResourceAnalyzer
         $resources = [];
 
         foreach ($files as $file) {
-            if (str_contains($file, 'Http' . DIRECTORY_SEPARATOR . 'Resources')) {
+            if (str_contains($file, 'Http'.DIRECTORY_SEPARATOR.'Resources')) {
             }
         }
 

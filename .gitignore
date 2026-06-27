@@ -26,8 +26,11 @@ yarn-error.log*
 # Generated output
 
 /carve-output/
+/carve-report.md
 /build/
 /dist/
+/tests/Fixtures/*.json
+!/tests/Fixtures/.gitkeep
 
 # Laravel / runtime local folders
 

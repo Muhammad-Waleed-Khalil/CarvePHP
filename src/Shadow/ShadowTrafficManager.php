@@ -30,7 +30,7 @@ final class ShadowTrafficManager
 
     public function report(int $last = 1000): string
     {
-        $lines = ["Shadow Traffic Report", "=====================", ""];
+        $lines = ['Shadow Traffic Report', '=====================', ''];
 
         foreach ($this->routes as $route => $config) {
             $status = $config['enabled'] ? 'ENABLED' : 'DISABLED';

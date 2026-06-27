@@ -11,7 +11,7 @@ final class EventAnalyzer
         $events = [];
 
         foreach ($files as $file) {
-            if (str_contains($file, 'Events' . DIRECTORY_SEPARATOR)) {
+            if (str_contains($file, 'Events'.DIRECTORY_SEPARATOR)) {
             }
         }
 

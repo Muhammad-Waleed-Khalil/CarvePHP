@@ -10,7 +10,7 @@ final class TraceContextManager
 
     public static function start(): TraceContext
     {
-        $context = new TraceContext();
+        $context = new TraceContext;
         $context->traceId = bin2hex(random_bytes(16));
         $context->startedAt = microtime(true);
         self::$currentContext = $context;

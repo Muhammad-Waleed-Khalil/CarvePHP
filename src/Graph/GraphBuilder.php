@@ -14,7 +14,7 @@ final class GraphBuilder
 
     public function build(string $staticScanPath, string $traceSource = 'database'): GraphBuildResult
     {
-        $graph = new WeightedGraph();
+        $graph = new WeightedGraph;
         $staticData = $this->loadStaticData($staticScanPath);
         $traceData = $this->loadTraceData($traceSource);
 

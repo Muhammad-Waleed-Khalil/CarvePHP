@@ -22,15 +22,15 @@ final class CarveServiceProvider extends ServiceProvider
 {
     public function boot(): void
     {
-        $this->mergeConfigFrom(__DIR__ . '/../config/carve.php', 'carve');
+        $this->mergeConfigFrom(__DIR__.'/../config/carve.php', 'carve');
 
         if ($this->app->runningInConsole()) {
             $this->publishes([
-                __DIR__ . '/../config/carve.php' => config_path('carve.php'),
+                __DIR__.'/../config/carve.php' => config_path('carve.php'),
             ], 'carve-config');
 
             $this->publishes([
-                __DIR__ . '/../database/migrations' => database_path('migrations'),
+                __DIR__.'/../database/migrations' => database_path('migrations'),
             ], 'carve-migrations');
 
             $this->commands([
@@ -52,6 +52,6 @@ final class CarveServiceProvider extends ServiceProvider
 
     public function register(): void
     {
-        $this->app->singleton('carve', fn () => new Carve());
+        $this->app->singleton('carve', fn () => new Carve);
     }
 }

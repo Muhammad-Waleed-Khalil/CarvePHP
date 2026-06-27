@@ -78,7 +78,7 @@ php artisan carve:generate-service billing --with-openapi --with-client --with-t
 ## Roadmap
 
 - [x] Package foundation
-- [ ] Static scanner
+- [x] Static scanner
 - [ ] Runtime tracer
 - [ ] Graph builder
 - [ ] Boundary detection

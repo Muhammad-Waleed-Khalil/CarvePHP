@@ -27,8 +27,8 @@ final class FileWriter
     {
         $info = pathinfo($path);
 
-        return $info['dirname'] . DIRECTORY_SEPARATOR
-            . $info['filename'] . '.bak.'
-            . ($info['extension'] ?? '');
+        return $info['dirname'].DIRECTORY_SEPARATOR
+            .$info['filename'].'.bak.'
+            .($info['extension'] ?? '');
     }
 }

@@ -40,10 +40,10 @@ final class BoundarySuggester
         foreach ($clusters as $cluster) {
             $name = $this->nameGuesser->guess($cluster);
             $coupling = $this->couplingScorer->score($graph, $cluster);
-            $risk = $this->riskScorer->score($coupling, $cluster);
+            $risk = $this->riskScorer->scoreFromData($coupling->score, $cluster);
 
             $candidates[] = new BoundaryCandidate(
-                id: 'boundary:' . $name,
+                id: 'boundary:'.$name,
                 name: $name,
                 slug: strtolower($name),
                 confidence: 0.0,

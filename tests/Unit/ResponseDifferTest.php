@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Carve\Tests\Unit;
 
-use Carve\Shadow\ResponseNormalizer;
 use Carve\Shadow\ResponseDiffer;
+use Carve\Shadow\ResponseNormalizer;
 use PHPUnit\Framework\TestCase;
 
 final class ResponseDifferTest extends TestCase

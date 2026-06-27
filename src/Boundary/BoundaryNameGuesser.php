@@ -20,7 +20,7 @@ final class BoundaryNameGuesser
             return $name;
         }
 
-        return 'Boundary_' . implode('_', array_slice($tables, 0, 2));
+        return 'Boundary_'.implode('_', array_slice($tables, 0, 2));
     }
 
     private function fromTableNames(array $tables): ?string

@@ -28,7 +28,7 @@ final class StranglerConfigGenerator
 
                 $config['routes'][] = [
                     'boundary' => $slug,
-                    'pattern' => $path . '*',
+                    'pattern' => $path.'*',
                     'methods' => ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
                     'target' => "env({$envPrefix}_SERVICE_URL)",
                     'enabled' => "env(CARVE_SERVICE_{$envPrefix}_ENABLED, false)",
@@ -37,7 +37,7 @@ final class StranglerConfigGenerator
             }
         }
 
-        $content = "<?php\n\nreturn " . var_export($config, true) . ";\n";
+        $content = "<?php\n\nreturn ".var_export($config, true).";\n";
         $path = "{$outputDir}/carve_services.php";
 
         $this->writer->write($path, $content, mkdir: true);

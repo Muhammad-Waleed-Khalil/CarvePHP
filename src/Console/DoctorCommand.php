@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Carve\Console;
 
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 final class DoctorCommand extends Command
@@ -28,10 +27,10 @@ final class DoctorCommand extends Command
         $this->newLine();
         $this->line("PHP version:             {$phpVersion}");
         $this->line("Laravel version:         {$laravelVersion}");
-        $this->line("Config published:        " . ($configPublished ? '<info>Yes</info>' : '<fg=yellow>No</>'));
-        $this->line("Trace table exists:      " . ($traceTableExists ? '<info>Yes</info>' : '<fg=yellow>No</>'));
-        $this->line("Routes discoverable:     " . ($routesDiscoverable ? '<info>Yes</info>' : '<fg=yellow>No</>'));
-        $this->line("Modules folder:          " . ($modulesExist ? '<info>Yes</info>' : '<fg=yellow>No</>'));
+        $this->line('Config published:        '.($configPublished ? '<info>Yes</info>' : '<fg=yellow>No</>'));
+        $this->line('Trace table exists:      '.($traceTableExists ? '<info>Yes</info>' : '<fg=yellow>No</>'));
+        $this->line('Routes discoverable:     '.($routesDiscoverable ? '<info>Yes</info>' : '<fg=yellow>No</>'));
+        $this->line('Modules folder:          '.($modulesExist ? '<info>Yes</info>' : '<fg=yellow>No</>'));
         $this->line("DB driver:               {$dbDriver}");
 
         $warnings = [];

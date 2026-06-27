@@ -32,7 +32,7 @@ final class JsonlTraceStore implements TraceStoreInterface
             'duration_ms' => $record->durationMs,
             'started_at' => $record->startedAt,
             'events' => $record->events,
-        ]) . "\n";
+        ])."\n";
 
         file_put_contents($this->path, $line, FILE_APPEND | LOCK_EX);
     }

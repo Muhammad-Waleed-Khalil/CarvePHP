@@ -11,7 +11,7 @@ final class ListenerAnalyzer
         $listeners = [];
 
         foreach ($files as $file) {
-            if (str_contains($file, 'Listeners' . DIRECTORY_SEPARATOR)) {
+            if (str_contains($file, 'Listeners'.DIRECTORY_SEPARATOR)) {
             }
         }
 

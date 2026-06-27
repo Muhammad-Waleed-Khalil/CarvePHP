@@ -49,10 +49,18 @@ final class QueryExecutedListener
     private function extractOperation(string $sql): string
     {
         $sql = trim($sql);
-        if (str_starts_with(strtoupper($sql), 'SELECT')) return 'select';
-        if (str_starts_with(strtoupper($sql), 'INSERT')) return 'insert';
-        if (str_starts_with(strtoupper($sql), 'UPDATE')) return 'update';
-        if (str_starts_with(strtoupper($sql), 'DELETE')) return 'delete';
+        if (str_starts_with(strtoupper($sql), 'SELECT')) {
+            return 'select';
+        }
+        if (str_starts_with(strtoupper($sql), 'INSERT')) {
+            return 'insert';
+        }
+        if (str_starts_with(strtoupper($sql), 'UPDATE')) {
+            return 'update';
+        }
+        if (str_starts_with(strtoupper($sql), 'DELETE')) {
+            return 'delete';
+        }
 
         return 'unknown';
     }

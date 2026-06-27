@@ -13,7 +13,7 @@ final class ContractTestGenerator
 
     public function generate(string $boundary, array $boundaryData, string $outputDir = 'carve-output/monolith/tests'): array
     {
-        $className = ucfirst($boundary) . 'ContractTest';
+        $className = ucfirst($boundary).'ContractTest';
         $namespace = 'Tests\\Contracts';
 
         $methods = '';
@@ -43,7 +43,7 @@ final class ContractTestGenerator
         $parts = explode(' ', $route);
         $method = strtolower($parts[0] ?? 'get');
         $path = $parts[1] ?? '/';
-        $testName = 'test_' . strtolower($method) . '_' . str_replace(['/', '-'], '_', trim($path, '/'));
+        $testName = 'test_'.strtolower($method).'_'.str_replace(['/', '-'], '_', trim($path, '/'));
 
         return "
     public function {$testName}_shape(): void

@@ -13,7 +13,7 @@ final class RawSqlTableExtractorTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->extractor = new RawSqlTableExtractor();
+        $this->extractor = new RawSqlTableExtractor;
     }
 
     public function test_extracts_from_select(): void

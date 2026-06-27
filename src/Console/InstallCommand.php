@@ -34,7 +34,7 @@ final class InstallCommand extends Command
 
         if ($this->option('with-stubs')) {
             $target = base_path('resources/carve/stubs');
-            File::copyDirectory(__DIR__ . '/../../resources/stubs', $target);
+            File::copyDirectory(__DIR__.'/../../resources/stubs', $target);
             $this->info('Stubs published to resources/carve/stubs');
         }
 

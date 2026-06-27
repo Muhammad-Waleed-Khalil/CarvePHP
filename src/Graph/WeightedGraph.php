@@ -7,7 +7,9 @@ namespace Carve\Graph;
 final class WeightedGraph
 {
     private array $nodes = [];
+
     private array $edges = [];
+
     private array $adjacency = [];
 
     public function addNode(Node $node): void

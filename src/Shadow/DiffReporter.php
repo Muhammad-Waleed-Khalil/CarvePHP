@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Carve\Shadow;
 
-use Carve\Shadow\ValueObjects\ResponseDiff;
-
 final class DiffReporter
 {
     public function generate(int $last = 1000, string $format = 'md'): string
@@ -23,14 +21,14 @@ final class DiffReporter
             return json_encode($diffs, JSON_PRETTY_PRINT);
         }
 
-        $lines = ["# Shadow Diff Report", "", "## Differences Found: " . count($diffs), ""];
+        $lines = ['# Shadow Diff Report', '', '## Differences Found: '.count($diffs), ''];
 
         foreach ($diffs as $diff) {
             $lines[] = "### Path: {$diff->path}";
             $lines[] = "- Type: {$diff->type}";
-            $lines[] = "- Monolith: " . json_encode($diff->monolith);
-            $lines[] = "- Service: " . json_encode($diff->service);
-            $lines[] = "";
+            $lines[] = '- Monolith: '.json_encode($diff->monolith);
+            $lines[] = '- Service: '.json_encode($diff->service);
+            $lines[] = '';
         }
 
         return implode("\n", $lines);

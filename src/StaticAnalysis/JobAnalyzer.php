@@ -11,7 +11,7 @@ final class JobAnalyzer
         $jobs = [];
 
         foreach ($files as $file) {
-            if (str_contains($file, 'Jobs' . DIRECTORY_SEPARATOR)) {
+            if (str_contains($file, 'Jobs'.DIRECTORY_SEPARATOR)) {
             }
         }
 

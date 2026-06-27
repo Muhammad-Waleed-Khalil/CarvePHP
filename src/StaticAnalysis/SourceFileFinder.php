@@ -32,7 +32,7 @@ final class SourceFileFinder
                     continue;
                 }
 
-                $relativePath = str_replace(base_path() . DIRECTORY_SEPARATOR, '', $filePath);
+                $relativePath = str_replace(base_path().DIRECTORY_SEPARATOR, '', $filePath);
 
                 $excluded = false;
                 foreach ($exclude as $excludedPath) {

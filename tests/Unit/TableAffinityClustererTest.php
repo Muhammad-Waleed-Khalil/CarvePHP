@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace Carve\Tests\Unit;
 
 use Carve\Boundary\Algorithms\TableAffinityClusterer;
-use Carve\Graph\Node;
 use Carve\Graph\Edge;
-use Carve\Graph\WeightedGraph;
+use Carve\Graph\Node;
 use Carve\Graph\NodeType;
+use Carve\Graph\WeightedGraph;
 use PHPUnit\Framework\TestCase;
 
 final class TableAffinityClustererTest extends TestCase
@@ -17,12 +17,12 @@ final class TableAffinityClustererTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->clusterer = new TableAffinityClusterer();
+        $this->clusterer = new TableAffinityClusterer;
     }
 
     public function test_returns_empty_for_empty_graph(): void
     {
-        $graph = new WeightedGraph();
+        $graph = new WeightedGraph;
         $clusters = $this->clusterer->cluster($graph);
 
         $this->assertEmpty($clusters);
@@ -30,7 +30,7 @@ final class TableAffinityClustererTest extends TestCase
 
     public function test_returns_empty_for_no_table_nodes(): void
     {
-        $graph = new WeightedGraph();
+        $graph = new WeightedGraph;
         $graph->addNode(new Node('route:GET:/api/test', NodeType::ROUTE, 'test', 'Test'));
         $clusters = $this->clusterer->cluster($graph);
 
@@ -39,7 +39,7 @@ final class TableAffinityClustererTest extends TestCase
 
     public function test_clusters_connected_tables(): void
     {
-        $graph = new WeightedGraph();
+        $graph = new WeightedGraph;
         $graph->addNode(new Node('table:invoices', NodeType::TABLE, 'invoices', 'invoices'));
         $graph->addNode(new Node('table:payments', NodeType::TABLE, 'payments', 'payments'));
         $graph->addNode(new Node('table:users', NodeType::TABLE, 'users', 'users'));

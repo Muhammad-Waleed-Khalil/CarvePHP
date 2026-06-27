@@ -18,7 +18,7 @@ final class ScanCommandTest extends TestCase
 
     public function test_scan_command_runs(): void
     {
-        $this->artisan('carve:scan', ['--output' => __DIR__ . '/../Fixtures/test-scan.json'])
+        $this->artisan('carve:scan', ['--output' => __DIR__.'/../Fixtures/test-scan.json'])
             ->assertSuccessful();
     }
 }

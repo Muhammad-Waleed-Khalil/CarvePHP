@@ -11,7 +11,7 @@ final class FormRequestAnalyzer
         $formRequests = [];
 
         foreach ($files as $file) {
-            if (str_contains($file, 'Http' . DIRECTORY_SEPARATOR . 'Requests')) {
+            if (str_contains($file, 'Http'.DIRECTORY_SEPARATOR.'Requests')) {
             }
         }
 

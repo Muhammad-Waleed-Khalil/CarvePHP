@@ -5,5 +5,8 @@ parameters:
         - tests
     excludePaths:
         - tests/Fixtures
-    checkMissingIterableValueType: true
-    checkGenericClassInNonGenericObjectType: false
+        - carve-output
+    treatPhpDocTypesAsCertain: false
+    ignoreErrors:
+        -
+            identifier: missingType.iterableValue

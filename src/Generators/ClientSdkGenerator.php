@@ -14,7 +14,7 @@ final class ClientSdkGenerator
     public function generate(string $boundary, string $boundariesPath, string $outputDir = 'carve-output/clients'): array
     {
         $boundaryData = $this->loadBoundaryData($boundary, $boundariesPath);
-        $className = ucfirst($boundary) . 'ServiceClient';
+        $className = ucfirst($boundary).'ServiceClient';
         $namespace = config('carve.generation.client_namespace', 'App\\Clients');
 
         $methods = '';

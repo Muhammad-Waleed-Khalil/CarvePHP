@@ -13,7 +13,7 @@ final class ValidationRuleSchemaMapperTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->mapper = new ValidationRuleSchemaMapper();
+        $this->mapper = new ValidationRuleSchemaMapper;
     }
 
     public function test_maps_string_rule(): void

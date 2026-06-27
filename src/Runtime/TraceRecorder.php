@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Carve\Runtime;
 
 use Carve\Runtime\ValueObjects\TraceRecord;
-use Carve\Runtime\Stores\TraceStoreInterface;
 
 final class TraceRecorder
 {

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Carve\Tests\Feature;
 
 use Carve\CarveServiceProvider;
+use Illuminate\Contracts\Console\Kernel;
 use Orchestra\Testbench\TestCase;
 
 final class PackageBootTest extends TestCase
@@ -46,8 +47,11 @@ final class PackageBootTest extends TestCase
             'carve:diff',
         ];
 
+        $kernel = $this->app->make(Kernel::class);
+        $allCommands = array_keys($kernel->all());
+
         foreach ($commands as $command) {
-            $this->assertTrue($this->app->bound("command.{$command}") || $this->artisan($command));
+            $this->assertContains($command, $allCommands, "Command {$command} is not registered");
         }
     }
 }
