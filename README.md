@@ -2,23 +2,32 @@
 
 **Find service boundaries in Laravel monoliths using static analysis + runtime tracing.**
 
+[![Tests](https://github.com/Muhammad-Waleed-Khalil/CarvePHP/actions/workflows/tests.yml/badge.svg)](https://github.com/Muhammad-Waleed-Khalil/CarvePHP/actions/workflows/tests.yml)
+
 CarvePHP is a Laravel-first toolkit that analyzes your existing monolith and produces actionable migration reports. It combines static code analysis with runtime tracing to identify service boundaries with evidence.
 
-> **Status:** v0.1.0-alpha — Publishable preview. Ready for experimentation and feedback.
+> **Status:** v0.1.0-alpha — Preview release. Ready for experimentation and feedback. Not yet production-ready for automatic extraction.
+
+---
+
+## Installation
+
+```bash
+composer require carvephp/carve --dev
+```
+
+After installing, publish the config and run the environment check:
+
+```bash
+php artisan carve:install
+php artisan carve:doctor
+```
 
 ---
 
 ## Quickstart
 
 ```bash
-composer require carvephp/carve --dev
-
-# Publish config
-php artisan carve:install
-
-# Run environment check
-php artisan carve:doctor
-
 # Static scan your codebase
 php artisan carve:scan --pretty
 
@@ -30,6 +39,15 @@ php artisan carve:boundaries --report=carve-boundaries.md
 
 # Generate full migration report
 php artisan carve:report --output=carve-report.md
+```
+
+For better results, enable runtime tracing (optional):
+
+```bash
+php artisan carve:trace-install
+# Follow the instructions, then:
+echo "CARVE_TRACE_ENABLED=true" >> .env
+php artisan migrate
 ```
 
 **Sample report snippet:**
@@ -66,17 +84,23 @@ php artisan carve:report --output=carve-report.md
 
 | Feature | Status |
 |---------|--------|
-| Automatic service generation | ❌ (planned) |
-| Graph-based modularity clustering | 🔄 (stub) |
-| Event sourcing trace analysis | ❌ (planned) |
-| Shadow / diff mode for extraction validation | 🔄 (stub) |
-| One-command microservice extraction | ❌ (never planned — you stay in control) |
+| Automatic service generation | ❌ (planned for v0.2–v0.3) |
+| One-command microservice extraction | ❌ (you stay in control) |
+| Database splitting automation | ❌ (manual after report) |
+| Production-ready extraction workflow | ❌ (v1.0 target) |
+| Shadow / diff mode for extraction validation | 🔄 (experimental stub) |
 
 ---
 
-## Commands
+## Requirements
 
-| Command | Description |
+- PHP 8.2+
+- Laravel 11 or 12
+- Composer 2.x
+
+> **Note:** Laravel 10 is installable but not covered by CI in this alpha release.
+
+## Commands
 |---------|-------------|
 | `carve:doctor` | Check environment readiness |
 | `carve:scan` | Run static analysis on the monolith |
@@ -116,27 +140,6 @@ php artisan carve:report --output=carve-report.md
 │  (Markdown + JSON)                      │
 └─────────────────────────────────────────┘
 ```
-
----
-
-## Requirements
-
-- PHP 8.2+
-- Laravel 10, 11, or 12
-- Composer 2.x
-
-## Runtime Tracing (Optional)
-
-For better boundary detection, enable runtime tracing:
-
-```bash
-php artisan carve:trace-install
-# Follow the instructions, then:
-echo "CARVE_TRACE_ENABLED=true" >> .env
-php artisan migrate
-```
-
-This captures query and queue events. More traces → more accurate boundaries.
 
 ---
 

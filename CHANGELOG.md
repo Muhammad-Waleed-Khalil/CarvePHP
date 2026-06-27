@@ -1,8 +1,9 @@
 # Changelog
 
-## Unreleased / v0.1.0-alpha
+## v0.1.0-alpha — 2026-06-27
 
 ### Added
+- **Package Foundation:** Composer package with Laravel service provider, config, and auto-discovery.
 - **Static Scanner:** Analyzes routes, controllers, models, migrations, and raw SQL usage using `nikic/php-parser`.
 - **Runtime Tracer:** Middleware-based HTTP tracing with query event capture. Supports database and JSONL stores. Disabled by default.
 - **Graph Builder:** Combines static scan data and runtime traces into a weighted dependency graph.
@@ -19,10 +20,12 @@
   - `carve:report` — Generate full migration report
   - `carve:trace-install` — Runtime tracing setup guide
   - `carve:install` — Publish configuration
-- **80+ PHPUnit tests** covering all core functionality.
+- **Demo Fixtures:** Realistic billing + support domain scan data and trace logs for testing.
+- **99+ PHPUnit tests** covering all core functionality.
 - **PHPStan level 6** clean with zero errors.
 - **Laravel Pint** coding standards enforced.
-- **GitHub Actions CI** — runs validate, pint, phpstan, phpunit.
+- **GitHub Actions CI** — validate, pint, phpstan, phpunit across PHP 8.2–8.4 with Laravel 11–12.
+- **Community Files:** README, CHANGELOG, CONTRIBUTING, SECURITY, LICENSE.
 
 ### Changed
 - Graph builder and boundary detection stubs filled with full implementations.
@@ -33,9 +36,17 @@
 - TraceRecorder now passes requestId, startedAt, endedAt to TraceRecord.
 - Store failures no longer break HTTP requests.
 - Service provider correctly binds all runtime dependencies.
+- CouplingScorer and BoundaryNameGuesser edge-case matching.
 
 ### Removed
 - None.
+
+### Known Limitations (v0.1.0-alpha)
+- Laravel 10 is installable but not covered by CI.
+- No automatic service generation or extraction.
+- Generators (`generate:service`, `shadow`, `diff`) are experimental stubs.
+- Runtime tracing must be manually configured.
+- Boundary suggestions require human review before any extraction work.
 
 ### Security
 - Runtime tracing does not capture request bodies or SQL bindings by default.

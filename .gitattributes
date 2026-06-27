@@ -1,0 +1,16 @@
+* text=auto
+
+/.github            export-ignore
+/tests              export-ignore
+/examples           export-ignore
+/.opencode          export-ignore
+/.codex             export-ignore
+/.claude            export-ignore
+/.cursor            export-ignore
+/AGENTS.md          export-ignore
+/phpstan.neon       export-ignore
+/pint.json          export-ignore
+/phpunit.xml        export-ignore
+/phpunit.xml.dist   export-ignore
+/composer.lock      export-ignore
+/CarvePHP_AI_Coder_Spec_Kit.md export-ignore
