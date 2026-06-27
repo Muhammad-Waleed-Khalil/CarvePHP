@@ -8,7 +8,6 @@ use Carve\Runtime\TraceContextManager;
 use Carve\Runtime\TraceRecorder;
 use Closure;
 use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Response;
 
 final class CarveTraceMiddleware
 {
@@ -16,7 +15,7 @@ final class CarveTraceMiddleware
         private readonly TraceRecorder $recorder,
     ) {}
 
-    public function handle(Request $request, Closure $next): Response
+    public function handle(Request $request, Closure $next): mixed
     {
         if (! config('carve.runtime_tracing.enabled', false)) {
             return $next($request);
