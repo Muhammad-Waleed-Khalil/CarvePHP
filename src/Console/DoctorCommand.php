@@ -55,6 +55,6 @@ final class DoctorCommand extends Command
             }
         }
 
-        return self::SUCCESS;
+        return 0;
     }
 }

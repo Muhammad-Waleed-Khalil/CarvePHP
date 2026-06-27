@@ -29,7 +29,7 @@ final class ShadowCommand extends Command
             default => $this->error("Unknown action: {$action}. Use enable, disable, or report."),
         };
 
-        return self::SUCCESS;
+        return 0;
     }
 
     private function enableShadow(ShadowTrafficManager $manager): void

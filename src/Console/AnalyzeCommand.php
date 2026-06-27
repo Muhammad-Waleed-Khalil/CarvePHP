@@ -51,6 +51,6 @@ final class AnalyzeCommand extends Command
             $this->warn('No nodes were created. Check that the static scan file exists and contains data.');
         }
 
-        return self::SUCCESS;
+        return 0;
     }
 }

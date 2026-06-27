@@ -55,7 +55,7 @@ final class BoundariesCommand extends Command
             $this->line('Report written to '.$reportPath);
         }
 
-        return self::SUCCESS;
+        return 0;
     }
 
     private function generateMarkdownReport(array $data): string

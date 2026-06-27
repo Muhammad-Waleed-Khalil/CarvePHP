@@ -30,6 +30,6 @@ final class GenerateClientCommand extends Command
 
         $this->info("Client SDK written to {$this->option('output')}");
 
-        return self::SUCCESS;
+        return 0;
     }
 }

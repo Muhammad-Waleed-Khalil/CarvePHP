@@ -27,6 +27,6 @@ final class DiffCommand extends Command
 
         $this->line($report);
 
-        return self::SUCCESS;
+        return 0;
     }
 }

@@ -40,6 +40,6 @@ final class ScanCommand extends Command
 
         $this->info("Static scan written to {$outputPath}");
 
-        return self::SUCCESS;
+        return 0;
     }
 }

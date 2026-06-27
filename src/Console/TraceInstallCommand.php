@@ -37,6 +37,6 @@ final class TraceInstallCommand extends Command
         $this->warn('Runtime tracing does NOT modify your application files automatically.');
         $this->line('Enable tracing in .env: CARVE_TRACE_ENABLED=true');
 
-        return self::SUCCESS;
+        return 0;
     }
 }

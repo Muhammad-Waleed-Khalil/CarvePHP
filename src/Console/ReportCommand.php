@@ -40,6 +40,6 @@ final class ReportCommand extends Command
 
         $this->info("Report written to {$outputPath}");
 
-        return self::SUCCESS;
+        return 0;
     }
 }

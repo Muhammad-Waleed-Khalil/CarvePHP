@@ -33,6 +33,6 @@ final class GenerateOpenApiCommand extends Command
 
         $this->info("OpenAPI spec written to {$outputDir}/{$boundary}.yaml");
 
-        return self::SUCCESS;
+        return 0;
     }
 }

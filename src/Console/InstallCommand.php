@@ -45,6 +45,6 @@ final class InstallCommand extends Command
         $this->line('  2. php artisan carve:doctor');
         $this->line('  3. php artisan carve:scan --pretty');
 
-        return self::SUCCESS;
+        return 0;
     }
 }
