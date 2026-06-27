@@ -1,0 +1,14 @@
+<?php
+
+declare(strict_types=1);
+
+return [
+    'services' => [
+        '{{ BOUNDARY_SLUG }}' => [
+            'enabled' => env('CARVE_SERVICE_{{ BOUNDARY_ENV }}_ENABLED', false),
+            'base_url' => env('{{ BOUNDARY_ENV }}_SERVICE_URL', 'http://localhost:8081'),
+            'shadow' => env('CARVE_SERVICE_{{ BOUNDARY_ENV }}_SHADOW', false),
+            'rollout_percentage' => (int) env('CARVE_SERVICE_{{ BOUNDARY_ENV }}_ROLLOUT', 0),
+        ],
+    ],
+];

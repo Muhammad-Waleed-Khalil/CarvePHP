@@ -1,0 +1,9 @@
+/vendor/
+/node_modules/
+/.phpunit.cache/
+/phpunit.xml
+/carve-output/
+/storage/
+.env
+.DS_Store
+*.log

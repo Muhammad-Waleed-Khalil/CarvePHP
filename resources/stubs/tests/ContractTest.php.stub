@@ -1,0 +1,30 @@
+<?php
+
+declare(strict_types=1);
+
+namespace {{ TEST_NAMESPACE }};
+
+use Illuminate\Support\Facades\Http;
+use Tests\TestCase;
+
+class {{ TEST_CLASS_NAME }} extends TestCase
+{
+    private string $serviceBaseUrl;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->serviceBaseUrl = config('carve_services.services.{{ BOUNDARY_SLUG }}.base_url', 'http://localhost:8081');
+    }
+
+{{ TEST_METHODS }}
+
+    private function assertShapeMatch(array $monolith, array $service): void
+    {
+        $this->assertSame(
+            array_keys($monolith),
+            array_keys($service),
+            'Top-level response shape mismatch.'
+        );
+    }
+}

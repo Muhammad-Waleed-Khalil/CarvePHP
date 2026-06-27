@@ -1,0 +1,26 @@
+<?php
+
+declare(strict_types=1);
+
+namespace {{ CLIENT_NAMESPACE }};
+
+use Illuminate\Http\Client\PendingRequest;
+use Illuminate\Support\Facades\Http;
+
+final class {{ CLIENT_CLASS_NAME }}
+{
+    public function __construct(
+        private readonly string $baseUrl,
+        private readonly int $timeoutMs = 1500,
+    ) {}
+
+{{ CLIENT_METHODS }}
+
+    private function http(array $headers = []): PendingRequest
+    {
+        return Http::baseUrl($this->baseUrl)
+            ->timeout($this->timeoutMs / 1000)
+            ->retry(2, 100)
+            ->withHeaders($headers);
+    }
+}
