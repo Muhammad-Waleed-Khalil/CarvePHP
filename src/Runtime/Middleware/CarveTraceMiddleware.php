@@ -36,9 +36,9 @@ final class CarveTraceMiddleware
         $context->uri = $request->path();
 
         $route = $request->route();
-        if ($route !== null) {
-            $context->routeName = $route->getName();
-            $context->controllerAction = $route->getActionName();
+        if ($route !== null && is_object($route)) {
+            $context->routeName = method_exists($route, 'getName') ? $route->getName() : null;
+            $context->controllerAction = method_exists($route, 'getActionName') ? $route->getActionName() : null;
         }
 
         if (config('carve.runtime_tracing.capture_user_id', false) && $request->user()) {
@@ -68,11 +68,11 @@ final class CarveTraceMiddleware
         $ignored = config('carve.runtime_tracing.ignored_routes', []);
         $route = $request->route();
 
-        if ($route === null) {
+        if ($route === null || ! is_object($route)) {
             return false;
         }
 
-        $name = $route->getName();
+        $name = method_exists($route, 'getName') ? $route->getName() : null;
 
         foreach ($ignored as $pattern) {
             $regex = '/^'.str_replace('\*', '.*', preg_quote($pattern, '/')).'$/';

@@ -31,6 +31,8 @@ yarn-error.log*
 /dist/
 /tests/Fixtures/*.json
 !/tests/Fixtures/.gitkeep
+!/tests/Fixtures/demo-scan.json
+!/tests/Fixtures/test-scan.json
 
 # Laravel / runtime local folders
 
