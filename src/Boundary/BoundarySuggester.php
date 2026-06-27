@@ -6,7 +6,10 @@ namespace Carve\Boundary;
 
 use Carve\Boundary\Algorithms\TableAffinityClusterer;
 use Carve\Boundary\ValueObjects\BoundaryCandidate;
+use Carve\Graph\Edge;
 use Carve\Graph\GraphRepository;
+use Carve\Graph\Node;
+use Carve\Graph\WeightedGraph;
 
 final class BoundarySuggester
 {
@@ -40,16 +43,18 @@ final class BoundarySuggester
         foreach ($clusters as $cluster) {
             $name = $this->nameGuesser->guess($cluster);
             $coupling = $this->couplingScorer->score($graph, $cluster);
-            $risk = $this->riskScorer->scoreFromData($coupling->score, $cluster);
+
+            $riskScoreObj = $this->riskScorer->scoreFromData($coupling->score, $cluster);
+            $riskScore = $riskScoreObj->score;
 
             $candidates[] = new BoundaryCandidate(
-                id: 'boundary:'.$name,
+                id: 'boundary:'.strtolower(preg_replace('/[^a-zA-Z0-9_]/', '_', $name)),
                 name: $name,
-                slug: strtolower($name),
-                confidence: 0.0,
+                slug: strtolower(preg_replace('/[^a-zA-Z0-9_]/', '_', $name)),
+                confidence: min($cluster['cohesion'] ?? 0.0 + (1.0 - $coupling->score), 1.0),
                 cohesionScore: $cluster['cohesion'] ?? 0.0,
                 couplingScore: $coupling->score,
-                riskScore: $risk->score,
+                riskScore: $riskScore,
                 routes: $cluster['routes'] ?? [],
                 controllers: $cluster['controllers'] ?? [],
                 models: $cluster['models'] ?? [],
@@ -73,7 +78,7 @@ final class BoundarySuggester
         ];
     }
 
-    private function loadGraph(string $graphPath): mixed
+    private function loadGraph(string $graphPath): ?WeightedGraph
     {
         if (! file_exists($graphPath)) {
             return null;
@@ -81,10 +86,34 @@ final class BoundarySuggester
 
         $data = json_decode(file_get_contents($graphPath), true);
 
-        if ($data === null) {
+        if ($data === null || ! isset($data['nodes'])) {
             return null;
         }
 
-        return $this->repository->load();
+        $graph = new WeightedGraph;
+
+        foreach ($data['nodes'] as $nodeData) {
+            $graph->addNode(new Node(
+                id: $nodeData['id'],
+                type: $nodeData['type'],
+                name: $nodeData['name'],
+                label: $nodeData['label'],
+                meta: $nodeData['meta'] ?? [],
+            ));
+        }
+
+        foreach ($data['edges'] as $edgeData) {
+            $graph->addEdge(new Edge(
+                from: $edgeData['from'],
+                to: $edgeData['to'],
+                type: $edgeData['type'],
+                weight: (float) $edgeData['weight'],
+                evidence: $edgeData['evidence'] ?? [],
+            ));
+        }
+
+        $this->repository->save($graph);
+
+        return $graph;
     }
 }

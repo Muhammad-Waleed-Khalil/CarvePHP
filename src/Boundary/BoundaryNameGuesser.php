@@ -40,25 +40,24 @@ final class BoundaryNameGuesser
             return null;
         }
 
-        $parts = array_map(fn ($t) => explode('_', $t), $tables);
-        $first = $parts[0];
+        $first = $tables[0];
+        $prefix = '';
 
-        for ($i = count($first) - 1; $i >= 1; $i--) {
-            $candidate = implode('_', array_slice($first, 0, $i));
-            $match = true;
+        for ($i = 1; $i <= strlen($first); $i++) {
+            $candidate = substr($first, 0, $i);
 
-            foreach ($parts as $p) {
-                if (! str_starts_with(implode('_', $p), $candidate)) {
-                    $match = false;
-                    break;
+            foreach ($tables as $table) {
+                if (! str_starts_with($table, $candidate)) {
+                    break 2;
                 }
             }
 
-            if ($match) {
-                return $candidate;
-            }
+            $prefix = $candidate;
         }
 
-        return null;
+        // Trim trailing underscore and require a meaningful prefix length
+        $prefix = rtrim($prefix, '_');
+
+        return strlen($prefix) >= 3 ? $prefix : null;
     }
 }

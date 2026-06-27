@@ -41,6 +41,21 @@ final class CarveServiceProvider extends ServiceProvider
 
         PendingRequestMacro::register();
 
+        $this->commands([
+            InstallCommand::class,
+            DoctorCommand::class,
+            ScanCommand::class,
+            TraceInstallCommand::class,
+            AnalyzeCommand::class,
+            BoundariesCommand::class,
+            ReportCommand::class,
+            GenerateServiceCommand::class,
+            GenerateOpenApiCommand::class,
+            GenerateClientCommand::class,
+            ShadowCommand::class,
+            DiffCommand::class,
+        ]);
+
         if ($this->app->runningInConsole()) {
             $this->publishes([
                 __DIR__.'/../config/carve.php' => config_path('carve.php'),
@@ -49,21 +64,6 @@ final class CarveServiceProvider extends ServiceProvider
             $this->publishes([
                 __DIR__.'/../database/migrations' => database_path('migrations'),
             ], 'carve-migrations');
-
-            $this->commands([
-                InstallCommand::class,
-                DoctorCommand::class,
-                ScanCommand::class,
-                TraceInstallCommand::class,
-                AnalyzeCommand::class,
-                BoundariesCommand::class,
-                ReportCommand::class,
-                GenerateServiceCommand::class,
-                GenerateOpenApiCommand::class,
-                GenerateClientCommand::class,
-                ShadowCommand::class,
-                DiffCommand::class,
-            ]);
         }
 
         $this->registerListeners();

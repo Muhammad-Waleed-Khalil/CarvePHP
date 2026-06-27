@@ -11,13 +11,13 @@ final class ReportFormatter
         private readonly JsonReportWriter $jsonWriter,
     ) {}
 
-    public function format(string $format, ?string $scanPath, ?string $graphPath, ?string $boundariesPath): string
+    public function format(string $format, string $scanPath, string $graphPath, string $boundariesPath): string
     {
         return match ($format) {
             'json' => $this->jsonWriter->generate([
-                'scan' => $scanPath ? $this->loadJson($scanPath) : null,
-                'graph' => $graphPath ? $this->loadJson($graphPath) : null,
-                'boundaries' => $boundariesPath ? $this->loadJson($boundariesPath) : null,
+                'scan' => $this->loadJson($scanPath),
+                'graph' => $this->loadJson($graphPath),
+                'boundaries' => $this->loadJson($boundariesPath),
             ]),
             default => $this->markdownWriter->generate($scanPath, $graphPath, $boundariesPath),
         };

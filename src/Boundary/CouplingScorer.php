@@ -45,8 +45,10 @@ final class CouplingScorer
 
     private function isInCluster(string $id, array $clusterIds): bool
     {
+        $tableName = str_replace('table:', '', $id);
+
         foreach ($clusterIds as $clusterId) {
-            if (str_contains($id, $clusterId)) {
+            if ($tableName === $clusterId) {
                 return true;
             }
         }

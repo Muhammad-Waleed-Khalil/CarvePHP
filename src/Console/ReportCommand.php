@@ -4,33 +4,41 @@ declare(strict_types=1);
 
 namespace Carve\Console;
 
-use Carve\Reports\MarkdownReportWriter;
+use Carve\Reports\ReportFormatter;
 use Illuminate\Console\Command;
 
 final class ReportCommand extends Command
 {
     protected $signature = 'carve:report
-        {--scan= : Static scan JSON path}
-        {--graph= : Graph JSON path}
-        {--boundaries= : Boundaries JSON path}
+        {--scan=storage/app/carve/static-scan.json : Static scan JSON path}
+        {--graph=storage/app/carve/graph.json : Graph JSON path}
+        {--boundaries=storage/app/carve/boundaries.json : Boundaries JSON path}
+        {--format=markdown : Output format (markdown|json)}
         {--output=carve-report.md : Output report path}';
 
-    protected $description = 'Generate a full CarvePHP migration report';
+    protected $description = 'Generate a comprehensive migration assessment report';
 
     public function handle(): int
     {
         $this->info('Generating report...');
 
-        $writer = app(MarkdownReportWriter::class);
-        $report = $writer->generate(
-            scanPath: $this->option('scan'),
-            graphPath: $this->option('graph'),
-            boundariesPath: $this->option('boundaries'),
+        $formatter = app(ReportFormatter::class);
+        $report = $formatter->format(
+            format: (string) $this->option('format'),
+            scanPath: (string) $this->option('scan'),
+            graphPath: (string) $this->option('graph'),
+            boundariesPath: (string) $this->option('boundaries'),
         );
 
-        file_put_contents($this->option('output'), $report);
+        $outputPath = (string) $this->option('output');
+        $outputDir = dirname($outputPath);
+        if (! is_dir($outputDir)) {
+            mkdir($outputDir, 0755, true);
+        }
 
-        $this->info("Report written to {$this->option('output')}");
+        file_put_contents($outputPath, $report);
+
+        $this->info("Report written to {$outputPath}");
 
         return self::SUCCESS;
     }

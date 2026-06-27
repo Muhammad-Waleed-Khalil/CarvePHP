@@ -43,7 +43,23 @@ final class TableAffinityClusterer implements BoundaryAlgorithmInterface
         usort($edges, fn ($a, $b) => $b->weight <=> $a->weight);
 
         $merged = [];
+
+        // Find the highest edge weight for threshold calculation
+        $maxWeight = 0.0;
         foreach ($edges as $edge) {
+            if ($edge->weight > $maxWeight) {
+                $maxWeight = $edge->weight;
+            }
+        }
+
+        // Only merge if edge weight is at least 20% of max (skip weak edges)
+        $threshold = $maxWeight * 0.2;
+
+        foreach ($edges as $edge) {
+            if ($edge->weight < $threshold) {
+                break; // edges are sorted descending, so rest are even weaker
+            }
+
             $fromCluster = $this->findCluster($edge->from, $merged, $clusters);
             $toCluster = $this->findCluster($edge->to, $merged, $clusters);
 
@@ -80,14 +96,16 @@ final class TableAffinityClusterer implements BoundaryAlgorithmInterface
 
     private function findCluster(string $nodeId, array $merged, array $clusters): ?string
     {
+        $tableName = str_replace('table:', '', $nodeId);
+
         foreach ($merged as $clusterId) {
-            if (isset($clusters[$clusterId]) && in_array($nodeId, $clusters[$clusterId]['tables'])) {
+            if (isset($clusters[$clusterId]) && in_array($tableName, $clusters[$clusterId]['tables'])) {
                 return $clusterId;
             }
         }
 
         foreach ($clusters as $clusterId => $cluster) {
-            if (in_array($nodeId, $cluster['tables'])) {
+            if (in_array($tableName, $cluster['tables'])) {
                 return $clusterId;
             }
         }

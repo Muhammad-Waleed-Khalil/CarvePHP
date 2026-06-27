@@ -1,19 +1,30 @@
 {
     "name": "carvephp/carve",
-    "description": "Laravel-first monolith to microservices migration toolkit.",
+    "description": "Find service boundaries in Laravel monoliths using static analysis + runtime tracing.",
     "type": "library",
     "license": "MIT",
+    "keywords": ["laravel", "microservices", "monolith", "refactoring", "service-boundaries", "static-analysis", "migration"],
+    "homepage": "https://github.com/Muhammad-Waleed-Khalil/CarvePHP",
+    "support": {
+        "issues": "https://github.com/Muhammad-Waleed-Khalil/CarvePHP/issues",
+        "source": "https://github.com/Muhammad-Waleed-Khalil/CarvePHP"
+    },
+    "authors": [
+        {
+            "name": "Muhammad Waleed Khalil",
+            "email": "muhammadwaleedkhalil@gmail.com"
+        }
+    ],
     "require": {
         "php": "^8.2",
         "illuminate/support": "^10.0|^11.0|^12.0",
         "illuminate/console": "^10.0|^11.0|^12.0",
         "illuminate/routing": "^10.0|^11.0|^12.0",
         "illuminate/database": "^10.0|^11.0|^12.0",
-        "nikic/php-parser": "^5.0",
-        "symfony/yaml": "^7.0"
+        "nikic/php-parser": "^5.0"
     },
     "require-dev": {
-        "orchestra/testbench": "^9.0|^10.0",
+        "orchestra/testbench": "^8.0|^9.0|^10.0",
         "phpunit/phpunit": "^11.0",
         "laravel/pint": "^1.0",
         "phpstan/phpstan": "^1.11"
