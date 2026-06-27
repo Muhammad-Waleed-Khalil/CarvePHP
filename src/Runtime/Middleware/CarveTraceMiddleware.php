@@ -55,7 +55,11 @@ final class CarveTraceMiddleware
             $context->exceptionMessage = $e->getMessage();
             throw $e;
         } finally {
-            $this->recorder->flush();
+            try {
+                $this->recorder->flush();
+            } catch (\Throwable) {
+                // Store failures must never break the app request
+            }
         }
     }
 

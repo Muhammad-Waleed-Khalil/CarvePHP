@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('job_class')->nullable();
             $table->string('user_id')->nullable();
             $table->integer('status_code')->nullable();
-            $table->timestamp('started_at')->index();
+            $table->timestamp('started_at')->nullable()->index();
             $table->timestamp('ended_at')->nullable();
             $table->integer('duration_ms')->nullable();
             $table->string('exception_class')->nullable();
