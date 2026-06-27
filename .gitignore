@@ -1,9 +1,62 @@
+# Dependencies
+
 /vendor/
 /node_modules/
-/.phpunit.cache/
-/phpunit.xml
-/carve-output/
-/storage/
+
+# Environment files
+
 .env
-.DS_Store
+.env.*
+!.env.example
+
+# Logs
+
 *.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# PHPUnit / coverage
+
+/.phpunit.cache/
+/.phpunit.result.cache
+/phpunit.xml
+/coverage/
+
+# Generated output
+
+/carve-output/
+/build/
+/dist/
+
+# Laravel / runtime local folders
+
+/storage/
+/bootstrap/cache/*.php
+
+# Local databases
+
+*.sqlite
+*.sqlite3
+database/*.sqlite
+database/*.sqlite3
+
+# OS files
+
+.DS_Store
+Thumbs.db
+
+# IDE / editor
+
+.idea/
+.vscode/
+
+# AI / local coding-agent files
+
+/.opencode/
+/.codex/
+/.claude/
+/.cursor/
+opencode.json
+AGENTS.md
+CarvePHP_AI_Coder_Spec_Kit.md
