@@ -14,12 +14,7 @@ return [
     ],
 
     'static_analysis' => [
-        'include_paths' => [
-            'app',
-            'routes',
-            'database',
-            'Modules',
-        ],
+        'include_paths' => [],
         'exclude_paths' => [
             'vendor',
             'storage',

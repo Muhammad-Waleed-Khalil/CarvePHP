@@ -3,7 +3,15 @@
     "description": "Find service boundaries in Laravel monoliths using static analysis + runtime tracing.",
     "type": "library",
     "license": "MIT",
-    "keywords": ["laravel", "microservices", "monolith", "refactoring", "service-boundaries", "static-analysis", "migration"],
+    "keywords": [
+        "laravel",
+        "microservices",
+        "monolith",
+        "refactoring",
+        "service-boundaries",
+        "static-analysis",
+        "migration"
+    ],
     "homepage": "https://github.com/Muhammad-Waleed-Khalil/CarvePHP",
     "support": {
         "issues": "https://github.com/Muhammad-Waleed-Khalil/CarvePHP/issues",

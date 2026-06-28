@@ -16,12 +16,16 @@ final class SourceFileFinder
     {
         $files = [];
 
-        foreach ($paths as $path) {
-            $absolutePath = base_path($path);
+        $searchPaths = $paths !== [] ? $paths : [base_path()];
+
+        foreach ($searchPaths as $path) {
+            $absolutePath = $this->resolvePath($path);
 
             if (! $this->files->isDirectory($absolutePath)) {
                 continue;
             }
+
+            $root = base_path();
 
             $iterator = $this->files->allFiles($absolutePath);
 
@@ -32,22 +36,45 @@ final class SourceFileFinder
                     continue;
                 }
 
-                $relativePath = str_replace(base_path().DIRECTORY_SEPARATOR, '', $filePath);
+                $relativePath = str_replace($root.DIRECTORY_SEPARATOR, '', $filePath);
 
-                $excluded = false;
-                foreach ($exclude as $excludedPath) {
-                    if (str_starts_with($relativePath, $excludedPath)) {
-                        $excluded = true;
-                        break;
-                    }
+                if ($this->isExcluded($relativePath, $exclude)) {
+                    continue;
                 }
 
-                if (! $excluded) {
-                    $files[] = $filePath;
-                }
+                $files[] = $filePath;
             }
         }
 
         return $files;
+    }
+
+    private function resolvePath(string $path): string
+    {
+        if ($path === base_path() || $this->files->isDirectory($path)) {
+            return $path;
+        }
+
+        $resolved = base_path($path);
+
+        if ($this->files->isDirectory($resolved)) {
+            return $resolved;
+        }
+
+        return $path;
+    }
+
+    private function isExcluded(string $relativePath, array $exclude): bool
+    {
+        foreach ($exclude as $excludedPath) {
+            $normalized = str_replace(['/', '\\'], DIRECTORY_SEPARATOR, $excludedPath);
+            $normalized = rtrim($normalized, DIRECTORY_SEPARATOR);
+
+            if (str_starts_with($relativePath, $normalized.DIRECTORY_SEPARATOR) || $relativePath === $normalized) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

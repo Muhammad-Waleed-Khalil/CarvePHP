@@ -29,7 +29,7 @@ final class ControllerAnalyzerTest extends TestCase
 
         $controller = $controllers[0];
         $this->assertInstanceOf(ClassInfo::class, $controller);
-        $this->assertSame('App\Http\Controllers\InvoiceController', $controller->name);
+        $this->assertSame('InvoiceController', $controller->name);
         $this->assertSame('App\Http\Controllers', $controller->namespace);
 
         $methods = $controller->methods;
@@ -68,8 +68,8 @@ final class ControllerAnalyzerTest extends TestCase
 
         $this->assertCount(3, $controllers);
         $names = array_map(fn (ClassInfo $c) => $c->name, $controllers);
-        $this->assertContains('App\Http\Controllers\InvoiceController', $names);
-        $this->assertContains('App\Http\Controllers\PaymentController', $names);
-        $this->assertContains('App\Http\Controllers\TicketController', $names);
+        $this->assertContains('InvoiceController', $names);
+        $this->assertContains('PaymentController', $names);
+        $this->assertContains('TicketController', $names);
     }
 }

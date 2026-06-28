@@ -24,12 +24,12 @@ final class RouteAnalyzer
         $routes = [];
 
         foreach ($files as $file) {
-            if (! str_contains($file, 'routes'.DIRECTORY_SEPARATOR) && ! str_contains($file, 'routes/')) {
+            $code = file_get_contents($file);
+            if ($code === false) {
                 continue;
             }
 
-            $code = file_get_contents($file);
-            if ($code === false) {
+            if (! str_contains($code, 'Route::')) {
                 continue;
             }
 

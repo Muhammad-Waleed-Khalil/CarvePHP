@@ -24,12 +24,12 @@ final class ModelAnalyzer
         $models = [];
 
         foreach ($files as $file) {
-            if (! str_contains($file, 'Models'.DIRECTORY_SEPARATOR) && ! str_contains($file, 'Models/')) {
+            $code = file_get_contents($file);
+            if ($code === false) {
                 continue;
             }
 
-            $code = file_get_contents($file);
-            if ($code === false) {
+            if (! str_contains($code, 'extends') || ! str_contains($code, 'Model')) {
                 continue;
             }
 

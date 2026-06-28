@@ -19,12 +19,12 @@ final class MigrationAnalyzer
         $migrations = [];
 
         foreach ($files as $file) {
-            if (! str_contains($file, 'migrations'.DIRECTORY_SEPARATOR) && ! str_contains($file, 'migrations/')) {
+            $code = file_get_contents($file);
+            if ($code === false) {
                 continue;
             }
 
-            $code = file_get_contents($file);
-            if ($code === false) {
+            if (! str_contains($code, 'Schema::') && ! str_contains($code, 'extends Migration')) {
                 continue;
             }
 

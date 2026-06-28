@@ -218,6 +218,9 @@ final class GraphBuilder
         // route_handled_by
         foreach ($routeControllerMap as $routeId => $controllerName) {
             $controllerId = 'controller:'.$controllerName;
+            if ($graph->getNode($controllerId) === null && isset($nameToFqcn[$controllerName])) {
+                $controllerId = 'controller:'.$nameToFqcn[$controllerName];
+            }
             if ($graph->getNode($controllerId) !== null) {
                 $graph->addEdge(new Edge(
                     from: $routeId,

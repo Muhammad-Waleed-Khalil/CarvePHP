@@ -20,12 +20,12 @@ final class ControllerAnalyzer
         $controllers = [];
 
         foreach ($files as $file) {
-            if (! str_contains($file, 'Http'.DIRECTORY_SEPARATOR.'Controllers') && ! str_contains($file, 'Http/Controllers')) {
+            $code = file_get_contents($file);
+            if ($code === false) {
                 continue;
             }
 
-            $code = file_get_contents($file);
-            if ($code === false) {
+            if (! preg_match('/\w+Controller\b/', $code)) {
                 continue;
             }
 
@@ -67,7 +67,10 @@ final class ControllerAnalyzer
         }
 
         $className = $classNode->name->name;
-        $fqcn = $namespace !== null ? $namespace.'\\'.$className : $className;
+
+        if (! str_ends_with($className, 'Controller')) {
+            return null;
+        }
 
         $methods = [];
         foreach ($classNode->stmts as $stmt) {
@@ -98,7 +101,7 @@ final class ControllerAnalyzer
         $deps = $this->extractDependencies($classNode, $imports);
 
         return new ClassInfo(
-            name: $fqcn,
+            name: $className,
             namespace: $namespace ?? '',
             file: $file,
             methods: $methods,
