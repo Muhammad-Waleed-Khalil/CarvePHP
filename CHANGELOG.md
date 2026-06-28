@@ -1,5 +1,26 @@
 # Changelog
 
+## v0.2.0-alpha — 2026-06-28
+
+### Changed
+
+- **All analyzers use content-based detection instead of path filters.** Source files are now identified by scanning code content (e.g., `Route::`, `class *Controller`, `Schema::create`) rather than directory paths. This makes CarvePHP work with any project structure — standard Laravel, Bagisto monolith, custom layouts — without configuration changes.
+- `SourceFileFinder` falls back to scanning `base_path()` when `include_paths` is empty, plus `exclude_paths` filtering.
+- `config/carve.php`: `static_analysis.include_paths` defaults to `[]` (scan entire project root).
+
+### Fixed
+
+- **Node ID duplication bug.** `ControllerAnalyzer` now stores the short class name in `name` (e.g., `PageController`) instead of the full FQCN, so `GraphBuilder`'s namespace concatenation produces correct node IDs.
+- **Route-to-controller matching with short names.** `GraphBuilder` falls back to `nameToFqcn` lookup when a route's controller name is a short class name (string syntax).
+- Test fixtures updated to reflect content-based detection behavior.
+
+### Known Limitations (v0.2.0-alpha)
+
+- Routes using `Route::controller()->group()` pattern lose controller context — 465/493 Bagisto routes have method names instead of FQCNs in the `controller` field.
+- No repository→model resolution — controllers that inject repositories produce 0 `uses_model` edges in the graph.
+- No boundary candidates on Bagisto due to the above gaps.
+- Proxy models (`konekt/concord`) and translatable models (`Astrotomic\Translatable`) are detected but their dual-table nature is not explicitly modeled.
+
 ## v0.1.2-alpha — 2026-06-27
 
 ### Fixed
